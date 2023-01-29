@@ -15,8 +15,9 @@ namespace Api_BookButikk.Data
         protected override void OnConfiguring
             (DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=.;BookButikkAPI;Integrated Security=True");
-            base.OnConfiguring (optionsBuilder);
+            ////connection string defined by onconfiguring, an alternative is to degine in startup/services
+            //optionsBuilder.UseSqlServer("Server=.;BookButikkAPI;Integrated Security=True");
+            //base.OnConfiguring (optionsBuilder);
         }
 
     }
