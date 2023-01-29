@@ -1,4 +1,5 @@
-﻿using Api_BookButikk.Repository;
+﻿using Api_BookButikk.Model;
+using Api_BookButikk.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -30,6 +31,17 @@ namespace Api_BookButikk.Controllers
             var bookById = await _bookRepository.GetBookById(bookId);
             if (bookById == null) { return NotFound(); }
             return Ok(bookById);
+        }
+
+        [HttpPost("")]
+        public async Task<IActionResult> AddBook([FromBody] BookModel bookModel)
+        {
+            var newBookId = await _bookRepository.AddBook(bookModel);
+            //return Ok(newBook);
+            return CreatedAtAction(
+                nameof(GetBookById),
+                new { id = newBookId, controller = "books" },
+                bookModel);
         }
 
 

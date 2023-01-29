@@ -52,6 +52,24 @@ namespace Api_BookButikk.Repository
             return bookById;
         }
 
+        //we're adding a book to database, but database doesnt understand bookmodel.
+        //interprete bookmodel type to book type
+
+        //public async Task<BookModel> AddBook(BookModel bookModel)
+        public async Task<int> AddBook(BookModel bookModel)
+        {
+            var newBook = new Books()
+            {
+                Title = bookModel.Title,
+                Description = bookModel.Description
+            };
+
+            _context.Books.Add(newBook);
+            await _context.SaveChangesAsync();
+            return newBook.Id;
+
+           
+        }
 
     }
 }
