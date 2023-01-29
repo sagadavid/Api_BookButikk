@@ -3,16 +3,14 @@ using Api_BookButikk.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Api_BookButikk.Migrations
 {
-    [DbContext(typeof(BookStoreDbContext))]
-    [Migration("20230129090336_startup")]
-    partial class startup
+    [DbContext(typeof(BookButikkDbContext))]
+    partial class BookButikkDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

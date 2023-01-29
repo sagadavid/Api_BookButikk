@@ -2,7 +2,7 @@
 
 namespace Api_BookButikk.Migrations
 {
-    public partial class startup : Migration
+    public partial class initialmigr : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

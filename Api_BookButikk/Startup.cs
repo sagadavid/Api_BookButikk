@@ -28,7 +28,7 @@ namespace Api_BookButikk
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BookStoreDbContext>(options =>
+            services.AddDbContext<BookButikkDbContext>(options =>
                  //options.UseSqlServer("Server=.;Database=BookButikkAPI;Integrated Security=True"));
                             //instead of hardcoded connection string, use configuration
                  //options.UseSqlServer(Configuration.GetConnectionString("BookButikkDb")));

@@ -2,15 +2,15 @@
 
 namespace Api_BookButikk.Data
 {
-    public class BookStoreDbContext : DbContext
+    public class BookButikkDbContext : DbContext
     {
-        public BookStoreDbContext
-            (DbContextOptions <BookStoreDbContext> contextOptions)
+        public BookButikkDbContext
+            (DbContextOptions <BookButikkDbContext> contextOptions)
             :base(contextOptions)
         {
         }
 
-        public DbSet<Books> Books { get; set; }
+        public DbSet<Books> Books { get; set; }//we could take bookmodel, instead
 
         protected override void OnConfiguring
             (DbContextOptionsBuilder optionsBuilder)
