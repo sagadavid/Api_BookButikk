@@ -29,7 +29,7 @@ namespace Api_BookButikk
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BookStoreDbContext>(options=> 
-                options.UseSqlServer("Server=.;BookButikkAPI;Integrated Security=True"));
+                options.UseSqlServer("Server=.;Database=BookButikkAPI;Integrated Security=True"));
             services.AddControllers();
             services.AddTransient<IBookRepository, BookRepository>();
         }

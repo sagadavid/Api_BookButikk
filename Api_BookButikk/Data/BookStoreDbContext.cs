@@ -16,7 +16,7 @@ namespace Api_BookButikk.Data
             (DbContextOptionsBuilder optionsBuilder)
         {
             ////connection string defined by onconfiguring, an alternative is to degine in startup/services
-            //optionsBuilder.UseSqlServer("Server=.;BookButikkAPI;Integrated Security=True");
+            //optionsBuilder.UseSqlServer("Server=.;Database=BookButikkAPI;Integrated Security=True");
             //base.OnConfiguring (optionsBuilder);
         }
 
