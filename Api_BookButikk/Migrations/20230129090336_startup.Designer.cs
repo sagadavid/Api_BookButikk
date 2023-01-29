@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api_BookButikk.Migrations
 {
     [DbContext(typeof(BookStoreDbContext))]
-    [Migration("20230129084351_initio")]
-    partial class initio
+    [Migration("20230129090336_startup")]
+    partial class startup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
