@@ -10,7 +10,7 @@ namespace Api_BookButikk.Data
         {
         }
 
-        public DbSet<Books> DbSBooks { get; set; }
+        public DbSet<Books> Books { get; set; }
 
         protected override void OnConfiguring
             (DbContextOptionsBuilder optionsBuilder)

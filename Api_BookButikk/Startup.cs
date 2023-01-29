@@ -29,9 +29,11 @@ namespace Api_BookButikk
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BookStoreDbContext>(options =>
-                //options.UseSqlServer("Server=.;Database=BookButikkAPI;Integrated Security=True"));
-                //instead of hardcoded connection string, use configuration
-                options.UseSqlServer(Configuration.GetConnectionString("BookButikkDb")));
+                 //options.UseSqlServer("Server=.;Database=BookButikkAPI;Integrated Security=True"));
+                            //instead of hardcoded connection string, use configuration
+                 //options.UseSqlServer(Configuration.GetConnectionString("BookButikkDb")));
+                            //sqlexpress connection string adjusted     
+            options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddControllers();
             services.AddTransient<IBookRepository, BookRepository>();
         }
