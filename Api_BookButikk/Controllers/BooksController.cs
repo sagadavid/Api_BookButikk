@@ -36,10 +36,10 @@ namespace Api_BookButikk.Controllers
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> AddNewBook
+        public async Task<IActionResult> PostNewBook
             ([FromBody] BookModel bookModel)
         {
-            var aNewBook = await _bookRepository.AddNewBook(bookModel);
+            var aNewBook = await _bookRepository.PostNewBook(bookModel);
             return CreatedAtAction(
                 nameof(GetBookById),
                 new { aNewBook, controller = "books" }, 

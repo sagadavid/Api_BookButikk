@@ -60,7 +60,7 @@ namespace Api_BookButikk.Repository
         //interprete bookmodel type to book type
 
         //public async Task<BookModel> AddBook(BookModel bookModel)
-        public async Task<int> AddNewBook(BookModel bookModel)
+        public async Task<int> PostNewBook(BookModel bookModel)
         {
             var newBook = new Books()
             {
@@ -76,15 +76,24 @@ namespace Api_BookButikk.Repository
        
         public async Task UpdateBook(int bookId, BookModel bookModel)
         {
-            var book2update=await _context.Books.FindAsync(bookId);
-            if (book2update != null)
+            //var book2update=await _context.Books.FindAsync(bookId);
+            //if (book2update != null)
+            //{
+            //    book2update.Title = bookModel.Title;
+            //    book2update.Description = bookModel.Description;
+            //}
+            
+            //above we reach database 2 times for one update, best practice will be:
+            var newBook = new Books()
             {
-                book2update.Title = bookModel.Title;
-                book2update.Description = bookModel.Description;
-            }
+                Id= bookId,
+                Title = bookModel.Title,
+                Description = bookModel.Description
+            };
 
-            await _context.SaveChangesAsync();  
-        }
+            _context.Books.Update(newBook);
+            await _context.SaveChangesAsync();
+           }
 
     }
 }
