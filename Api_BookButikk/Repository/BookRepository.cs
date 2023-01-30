@@ -111,5 +111,17 @@ namespace Api_BookButikk.Repository
         
         }
 
+        public async Task DeleteABook(int bookId)
+        {
+            //var book2delete = await _context.Books.FindAsync(bookId);
+            
+            //insteadof reaching db and finding id,
+            //create the object with id and send to delete/remove
+            var book2delete = new Books() { Id=bookId};
+
+             _context.Books.Remove(book2delete);
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

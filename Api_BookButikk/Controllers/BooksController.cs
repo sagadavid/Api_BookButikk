@@ -21,15 +21,15 @@ namespace Api_BookButikk.Controllers
 
 
         [HttpGet("")]
-        public async Task<IActionResult> GetAllBooks() 
+        public async Task<IActionResult> GetAllBooks()
         {
-        var books = await _bookRepository.GetAllBooks();
+            var books = await _bookRepository.GetAllBooks();
             return Ok(books);
         }
 
         [HttpGet("{bookId}")]
         public async Task<IActionResult> GetBookById
-            ([FromRoute]int bookId)
+            ([FromRoute] int bookId)
         {
             var bookById = await _bookRepository.GetBookById(bookId);
             if (bookById == null) { return NotFound(); }
@@ -43,27 +43,22 @@ namespace Api_BookButikk.Controllers
             var aNewBook = await _bookRepository.PostNewBook(bookModel);
             return CreatedAtAction(
                 nameof(GetBookById),
-                new { aNewBook, controller = "books" }, 
+                new { aNewBook, controller = "books" },
                 bookModel.Id);//couldnt get id in response
         }
 
         [HttpPut("{bookId}")]
         public async Task<IActionResult> UpdateBook
-            ([FromBody] BookModel bookModel, 
-            [FromRoute]int bookId)
+            ([FromBody] BookModel bookModel,
+            [FromRoute] int bookId)
         {
             await _bookRepository.UpdateBook(bookId, bookModel);
             return Ok();
         }
 
         //postman patch: https://localhost:5001/api/books/11
-//        //body: [
-//                  {
-//                    "op":"replace",
-//                    "path":"description",
-//                    "value": "patched description"
-//                  }
-//                 ]
+        /* body: [{"op":"replace","path":"description","value": "patched description"}]
+           body: [{"op":"remove","path":"title"}]*/
         [HttpPatch("{bookId}")]
         public async Task<IActionResult> PatchTheBook
            ([FromBody] JsonPatchDocument bookModel,
@@ -73,7 +68,12 @@ namespace Api_BookButikk.Controllers
             return Ok();
         }
 
-
+        [HttpDelete("{bookId}")]
+        public async Task<IActionResult> DeleteABook([FromRoute]int bookId)
+        {
+            await _bookRepository.DeleteABook(bookId);
+            return Ok(); 
+        }
 
 
 

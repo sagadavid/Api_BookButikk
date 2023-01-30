@@ -12,5 +12,6 @@ namespace Api_BookButikk.Repository
         Task<int> PostNewBook(BookModel bookModel);
         Task UpdateBook(int bookId, BookModel bookModel);
         Task PatchTheBook(int bookId, JsonPatchDocument bookModel);
+        Task DeleteABook(int bookId);
     }
 }
