@@ -18,16 +18,20 @@ namespace Api_BookButikk.Repository
             _context = context;
         }
 
-        public async Task<List<BookModel>> GetAllBooks()
         
         //since this is an asyn method, the return expression must be a type of <list<books>>, 
         //rather than Task<List<Books>>
-        {
-            //list of Books, need to be converted to bookmodel
-            //cannot convert genericlist<data.books> to genericlist<model.bookmodel>
+
+        //list of Books, need to be converted to bookmodel
+        //cannot convert genericlist<data.books> to genericlist<model.bookmodel>
+        //howeve this hardcoding conversion is not ideal when there are many records available.
+        //best practice is using mapper
+
         //var records=_context.Books.ToListAsync();
 
-            //data manually inserted in mssql server
+        //data was manually inserted in mssql server
+        public async Task<List<BookModel>> GetAllBooks()
+        { 
             var records = await _context.Books.Select(b => new BookModel()
             {
                 Id = b.Id,
@@ -42,7 +46,7 @@ namespace Api_BookButikk.Repository
         {
             //to fetch data based on other column, use where
             var bookById = await _context.Books
-                .Where(b=>b.Id== bookId).Select(b => new BookModel()
+                .Where(b=>b.Id == bookId).Select(b => new BookModel()
             {
                 Id = b.Id,
                 Title = b.Title,
@@ -56,7 +60,7 @@ namespace Api_BookButikk.Repository
         //interprete bookmodel type to book type
 
         //public async Task<BookModel> AddBook(BookModel bookModel)
-        public async Task<int> AddBook(BookModel bookModel)
+        public async Task<int> AddNewBook(BookModel bookModel)
         {
             var newBook = new Books()
             {
@@ -67,8 +71,19 @@ namespace Api_BookButikk.Repository
             _context.Books.Add(newBook);
             await _context.SaveChangesAsync();
             return newBook.Id;
+        }
 
-           
+       
+        public async Task UpdateBook(int bookId, BookModel bookModel)
+        {
+            var book2update=await _context.Books.FindAsync(bookId);
+            if (book2update != null)
+            {
+                book2update.Title = bookModel.Title;
+                book2update.Description = bookModel.Description;
+            }
+
+            await _context.SaveChangesAsync();  
         }
 
     }

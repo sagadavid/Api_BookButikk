@@ -8,6 +8,7 @@ namespace Api_BookButikk.Repository
     {
         Task<List<BookModel>> GetAllBooks();
         Task<BookModel> GetBookById(int bookId);
-        Task<int> AddBook(BookModel bookModel);
+        Task<int> AddNewBook(BookModel bookModel);
+        Task UpdateBook(int bookId, BookModel bookModel);
     }
 }

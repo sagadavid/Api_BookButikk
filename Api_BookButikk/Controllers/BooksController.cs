@@ -1,4 +1,5 @@
-﻿using Api_BookButikk.Model;
+﻿using Api_BookButikk.Data;
+using Api_BookButikk.Model;
 using Api_BookButikk.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,8 @@ namespace Api_BookButikk.Controllers
         }
 
         [HttpGet("{bookId}")]
-        public async Task<IActionResult> GetBookById([FromRoute]int bookId)
+        public async Task<IActionResult> GetBookById
+            ([FromRoute]int bookId)
         {
             var bookById = await _bookRepository.GetBookById(bookId);
             if (bookById == null) { return NotFound(); }
@@ -34,16 +36,24 @@ namespace Api_BookButikk.Controllers
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> AddBook([FromBody] BookModel bookModel)
+        public async Task<IActionResult> AddNewBook
+            ([FromBody] BookModel bookModel)
         {
-            var newBookId = await _bookRepository.AddBook(bookModel);
-            //return Ok(newBook);
+            var aNewBook = await _bookRepository.AddNewBook(bookModel);
             return CreatedAtAction(
                 nameof(GetBookById),
-                new { id = newBookId, controller = "books" },
-                bookModel);
+                new { aNewBook, controller = "books" }, 
+                bookModel.Id);//couldnt get id in response
         }
 
+        [HttpPut("{bookId}")]
+        public async Task<IActionResult> UpdateBook
+            ([FromBody] BookModel bookModel, 
+            [FromRoute]int bookId)
+        {
+            await _bookRepository.UpdateBook(bookId, bookModel);
+            return Ok();
+        }
 
     }
 }
