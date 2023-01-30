@@ -56,6 +56,14 @@ namespace Api_BookButikk.Controllers
             return Ok();
         }
 
+        //postman patch: https://localhost:5001/api/books/11
+//        //body: [
+//                  {
+//                    "op":"replace",
+//                    "path":"description",
+//                    "value": "patched description"
+//                  }
+//                 ]
         [HttpPatch("{bookId}")]
         public async Task<IActionResult> PatchTheBook
            ([FromBody] JsonPatchDocument bookModel,
