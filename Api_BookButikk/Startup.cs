@@ -35,6 +35,17 @@ namespace Api_BookButikk
             options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddControllers().AddNewtonsoftJson();//package to patch added
             services.AddTransient<IBookRepository, BookRepository>();
+            services.AddAutoMapper(typeof(Startup));//automapper is presented globally
+            services.AddCors(option=>//added
+            {
+                option.AddDefaultPolicy(builder =>
+            {
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+            });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +59,8 @@ namespace Api_BookButikk
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();//cors enabled globally
 
             app.UseAuthorization();
 

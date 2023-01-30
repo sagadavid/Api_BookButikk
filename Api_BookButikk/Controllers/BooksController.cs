@@ -19,7 +19,6 @@ namespace Api_BookButikk.Controllers
             _bookRepository = bookRepository;
         }
 
-
         [HttpGet("")]
         public async Task<IActionResult> GetAllBooks()
         {
@@ -59,6 +58,7 @@ namespace Api_BookButikk.Controllers
         //postman patch: https://localhost:5001/api/books/11
         /* body: [{"op":"replace","path":"description","value": "patched description"}]
            body: [{"op":"remove","path":"title"}]*/
+        
         [HttpPatch("{bookId}")]
         public async Task<IActionResult> PatchTheBook
            ([FromBody] JsonPatchDocument bookModel,
@@ -74,9 +74,6 @@ namespace Api_BookButikk.Controllers
             await _bookRepository.DeleteABook(bookId);
             return Ok(); 
         }
-
-
-
 
     }
 }
