@@ -33,7 +33,7 @@ namespace Api_BookButikk
                  //options.UseSqlServer("Server=.;Database=BookButikkAPI;Integrated Security=True"));
             //instead of hardcoded connection string above, use configuration below
             options.UseSqlServer(Configuration.GetConnectionString("Default")));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();//package to patch added
             services.AddTransient<IBookRepository, BookRepository>();
         }
 

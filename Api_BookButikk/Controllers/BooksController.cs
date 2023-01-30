@@ -2,6 +2,7 @@
 using Api_BookButikk.Model;
 using Api_BookButikk.Repository;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -54,6 +55,20 @@ namespace Api_BookButikk.Controllers
             await _bookRepository.UpdateBook(bookId, bookModel);
             return Ok();
         }
+
+        [HttpPatch("{bookId}")]
+        public async Task<IActionResult> PatchTheBook
+           ([FromBody] JsonPatchDocument bookModel,
+           [FromRoute] int bookId)
+        {
+            await _bookRepository.PatchTheBook(bookId, bookModel);
+            return Ok();
+        }
+
+
+
+
+
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Api_BookButikk.Data;
 using Api_BookButikk.Model;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -93,7 +94,22 @@ namespace Api_BookButikk.Repository
 
             _context.Books.Update(newBook);
             await _context.SaveChangesAsync();
-           }
+        }
+
+
+        //put updates all data of a record. if one property is updated but not the others, they all erase
+        //patch updates only wanted properties (rows of table), doesnt touch other props
+        //jsonpatch and newtonsjon packes are loaded for patch method
+        public async Task PatchTheBook(int bookId, JsonPatchDocument bookModel)
+        { 
+        var book = await _context.Books.FindAsync(bookId);
+            if (book!=null) 
+            {
+            bookModel.ApplyTo(book);
+            await _context.SaveChangesAsync();
+            }
+        
+        }
 
     }
 }
