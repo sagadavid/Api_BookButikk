@@ -4,14 +4,16 @@ using Api_BookButikk.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Api_BookButikk.Migrations
 {
     [DbContext(typeof(BookButikkDbContext))]
-    partial class BookButikkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230131223809_identitypackadded")]
+    partial class identitypackadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
