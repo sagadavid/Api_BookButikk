@@ -36,6 +36,7 @@ namespace Api_BookButikk
             //instead of hardcoded connection string above, use configuration below
             options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
+            //identity roles comes from package
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<BookButikkDbContext>()
                 .AddDefaultTokenProviders();
