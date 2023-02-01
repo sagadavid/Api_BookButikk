@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Api_BookButikk.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api_BookButikk.Controllers
@@ -7,5 +8,12 @@ namespace Api_BookButikk.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
+        private readonly IAccountRepository _accountRepository;
+
+        public AccountController(IAccountRepository accountRepository)
+        {
+            _accountRepository = accountRepository;
+            
+        }
     }
 }
