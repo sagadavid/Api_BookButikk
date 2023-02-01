@@ -6,6 +6,6 @@ namespace Api_BookButikk.Repository
 {
     public interface IAccountRepository
     {
-        Task<IdentityResult> SignUp(SignUpModel signUpModel)
+        Task<IdentityResult> SignUp(SignUpModel signUpModel);
     }
 }
