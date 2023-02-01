@@ -43,8 +43,14 @@ namespace Api_BookButikk
                 
 
             services.AddControllers().AddNewtonsoftJson();//package to patch added
+            
+            //configure repositories as in addtransient
             services.AddTransient<IBookRepository, BookRepository>();
+
+            services.AddTransient<IAccountRepository, AccountRepository>();
+
             services.AddAutoMapper(typeof(Startup));//automapper is presented globally
+            
             services.AddCors(option=>//added
             {
                 option.AddDefaultPolicy(builder =>
