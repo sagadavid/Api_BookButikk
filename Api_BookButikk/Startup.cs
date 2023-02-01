@@ -77,6 +77,8 @@ namespace Api_BookButikk
 
             app.UseCors();//cors enabled globally
 
+            app.UseAuthentication();//after signup is managed and requires authorize attribute at controller or action
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

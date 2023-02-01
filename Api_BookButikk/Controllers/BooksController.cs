@@ -1,6 +1,7 @@
 ﻿using Api_BookButikk.Data;
 using Api_BookButikk.Model;
 using Api_BookButikk.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,9 @@ namespace Api_BookButikk.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]//secure api with autorization, we already have signed users.
+               //authorize here is at controller level, can be used for actions alone
+               //notice !! add authentication to service.configure as well !!
     public class BooksController : ControllerBase
     {
         private readonly IBookRepository _bookRepository;
@@ -20,6 +24,7 @@ namespace Api_BookButikk.Controllers
         }
 
         [HttpGet("")]
+        //[Authorize]
         public async Task<IActionResult> GetAllBooks()
         {
             var books = await _bookRepository.GetAllBooks();
