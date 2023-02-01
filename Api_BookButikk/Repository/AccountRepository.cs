@@ -28,7 +28,17 @@ namespace Api_BookButikk.Repository
             };
             //now create this user by password
             return await _userManager.CreateAsync(user, signUpModel.Password);
-        
+            
+            /*postman post: https://localhost:5001/api/account/signup
+             {
+"firstname": "david",
+"lastname":"saga",
+"email":"davidsagaepost@gmail.com",
+"password":"Test@123.",
+"confirmpassword":"Test@123."
+}
+            */
+
         }
     }
 }

@@ -23,8 +23,9 @@ namespace Api_BookButikk.Controllers
         { 
         var signingUp = await _accountRepository.SignUp(signUpModel);
             if (signingUp.Succeeded) 
-                   { return Ok(signingUp.Succeeded); }
-           
+                   { return Ok(signingUp.Succeeded); }//if it succeeds, we have a new user
+                                                      //with given details in the databse
+
             return Unauthorized();
         }
 
