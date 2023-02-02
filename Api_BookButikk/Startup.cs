@@ -1,19 +1,24 @@
 using Api_BookButikk.Data;
 using Api_BookButikk.Model;
 using Api_BookButikk.Repository;
+using Google.Protobuf.WellKnownTypes;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Api_BookButikk
@@ -40,7 +45,28 @@ namespace Api_BookButikk
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<BookButikkDbContext>()
                 .AddDefaultTokenProviders();
-                
+
+            //add jwt configuration after appsettings
+            //jwt as authentication
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                   .AddJwtBearer(option =>
+                   {
+                       option.SaveToken = true;
+                       option.RequireHttpsMetadata = false;
+                       option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                       {
+                           ValidateIssuer = true,
+                           ValidateAudience = true,
+                           ValidAudience = Configuration["JWT:ValidAudience"],
+                           ValidIssuer = Configuration["JWT:ValidIssuer"],
+                           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
+                       };
+                   });
 
             services.AddControllers().AddNewtonsoftJson();//package to patch added
             
