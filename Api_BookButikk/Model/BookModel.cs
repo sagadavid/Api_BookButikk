@@ -6,7 +6,7 @@ namespace Api_BookButikk.Model
     {
         public int Id { get; set; }
         
-        [Required(ErrorMessage ="add a title, er du snill")]//validation
+        [Required(ErrorMessage ="add a title, vaer saa snill")]//validation
         public string Title { get; set; }
         public string Description { get; set; }
     }
